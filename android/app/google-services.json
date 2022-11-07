@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "265120766102",
+    "project_id": "click-game-8af15",
+    "storage_bucket": "click-game-8af15.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:265120766102:android:1f9742303c64b6e06b0ab7",
+        "android_client_info": {
+          "package_name": "com.example.clickgame"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "265120766102-39paf8n8srnp243khpcigbuja3gpggfm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCYv0ldFEjp56kxraHRjeDtxV8GEsieQbw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "265120766102-39paf8n8srnp243khpcigbuja3gpggfm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
