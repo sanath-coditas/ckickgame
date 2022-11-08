@@ -11,6 +11,7 @@ class GetPersonsEvent extends RoomScreenEvent {}
 
 class LogOutUserEvent extends RoomScreenEvent {}
 
-class TogglePlayEvent extends RoomScreenEvent {}
+class EnablePlayEvent extends RoomScreenEvent {}
+class DisablePlayEvent extends RoomScreenEvent {}
 
 class ResetScoreEvent extends RoomScreenEvent{}

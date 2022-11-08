@@ -32,11 +32,15 @@ class RoomScreenBloc extends Bloc<RoomScreenEvent, RoomScreenState> {
       status.fold((l) => emit(FailureState(errorMsg: l.message)), (r) => null);
     });
 
-    on<TogglePlayEvent>((event, emit) async {
-      final status = await togglePlayUsecase.togglePlay();
+    on<EnablePlayEvent>((event, emit) async {
+      final status = await togglePlayUsecase.enablePlay();
       status.fold((l) => emit(FailureState(errorMsg: l.message)), (r) => null);
     });
-
+    
+    on<DisablePlayEvent>((event, emit) async {
+      final status = await togglePlayUsecase.disablePlay();
+      status.fold((l) => emit(FailureState(errorMsg: l.message)), (r) => null);
+    });
     on<ResetScoreEvent>((event, emit) async {
       final status = await resetScoreUsecase.resetScore();
       status.fold((l) => emit(FailureState(errorMsg: l.message)), (r) => null);

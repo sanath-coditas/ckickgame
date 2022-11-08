@@ -87,7 +87,7 @@ class _RoomScreenState extends State<RoomScreen> {
                   return FloatingActionButton(
                     onPressed: () {
                       BlocProvider.of<RoomScreenBloc>(context)
-                          .add(TogglePlayEvent());
+                          .add(EnablePlayEvent());
                     },
                     child: const Icon(Icons.play_arrow),
                   );

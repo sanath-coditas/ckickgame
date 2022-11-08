@@ -9,7 +9,7 @@ class ResultScreen extends StatelessWidget {
   final Person person;
   @override
   Widget build(BuildContext context) {
-    BlocProvider.of<RoomScreenBloc>(context).add(TogglePlayEvent());
+    BlocProvider.of<RoomScreenBloc>(context).add(DisablePlayEvent());
     BlocProvider.of<RoomScreenBloc>(context).add(ResetScoreEvent());
     return Scaffold(
       appBar: AppBar(title: const Text(TextConstants.resultText)),

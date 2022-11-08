@@ -7,7 +7,10 @@ class TogglePlayUsecase {
   TogglePlayUsecase({
     required this.personRepository,
   });
-  Future<Either<Failure, void>> togglePlay() async{
-    return await personRepository.togglePlay();
+  Future<Either<Failure, void>> enablePlay() async{
+    return await personRepository.enablePlay();
+  }
+  Future<Either<Failure, void>> disablePlay() async{
+    return await personRepository.disablePlay();
   }
 }

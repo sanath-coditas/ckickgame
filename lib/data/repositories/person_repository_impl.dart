@@ -25,8 +25,13 @@ class PersonRepositoryImpl implements PersonRepository {
   }
 
   @override
-  Future<Either<Failure, void>> togglePlay() async {
-    return await fireStoreDataSource.togglePlay();
+  Future<Either<Failure, void>> enablePlay() async {
+    return await fireStoreDataSource.enablePlay();
+  }
+
+  @override
+  Future<Either<Failure, void>> disablePlay() async {
+    return await fireStoreDataSource.disablePlay();
   }
 
   @override

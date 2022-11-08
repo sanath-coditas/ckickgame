@@ -8,7 +8,8 @@ abstract class FireStoreDataSource {
   Future<Either<Failure, void>> addToRoom({required PersonModel personModel});
   Future<Either<Failure, Stream<List<PersonModel>>>> getPersons();
   Future<Either<Failure, void>> logoutUser();
-  Future<Either<Failure, void>> togglePlay();
+  Future<Either<Failure, void>> enablePlay();
+  Future<Either<Failure, void>> disablePlay();
   Future<Either<Failure, void>> increaseClickCount();
   Future<Either<Failure, void>> resetScore();
 }
@@ -56,22 +57,13 @@ class FireStoreDataSourceImpl implements FireStoreDataSource {
   }
 
   @override
-  Future<Either<Failure, void>> togglePlay() async {
+  Future<Either<Failure, void>> enablePlay() async {
     try {
-      bool? boolValue;
-      await FirebaseFirestore.instance
-          .collection('isGameStarted')
-          .doc('value')
-          .get()
-          .then((querySnapshot) {
-        boolValue = querySnapshot.data()!['isStarted'];
-      });
-      boolValue = boolValue! ? false : true;
       await FirebaseFirestore.instance
           .collection('isGameStarted')
           .doc('value')
           .update(
-        {'isStarted': boolValue},
+        {'isStarted': true},
       );
 
       return const Right(null);
@@ -79,7 +71,23 @@ class FireStoreDataSourceImpl implements FireStoreDataSource {
       return Left(ToggleFailure(message: 'Failed to toggle....'));
     }
   }
+  
+  @override
+  Future<Either<Failure, void>> disablePlay() async {
+    try {
+      
+      await FirebaseFirestore.instance
+          .collection('isGameStarted')
+          .doc('value')
+          .update(
+        {'isStarted': false},
+      );
 
+      return const Right(null);
+    } on ToggleFailure {
+      return Left(ToggleFailure(message: 'Failed to toggle....'));
+    }
+  }
   @override
   Future<Either<Failure, void>> increaseClickCount() async {
     try {
