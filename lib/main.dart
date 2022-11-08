@@ -1,9 +1,7 @@
 import 'package:clickgame/presentation/bloc/join_screen_bloc/joinscreen_bloc.dart';
 import 'package:clickgame/presentation/bloc/play_screen_bloc/play_screen_bloc.dart';
 import 'package:clickgame/presentation/bloc/room_screen_bloc/room_screen_bloc.dart';
-import 'package:clickgame/presentation/screens/join_screen.dart';
-import 'package:clickgame/presentation/screens/room_screen.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:clickgame/presentation/screens/auth_gateway.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -34,12 +32,8 @@ class MyApp extends StatelessWidget {
           create: (context) => kiwi.KiwiContainer().resolve<PlayScreenBloc>(),
         ),
       ],
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        home: (FirebaseAuth.instance.currentUser == null)
-            ? JoinScreen()
-            : const RoomScreen(),
-      ),
+      child: const MaterialApp(
+          debugShowCheckedModeBanner: false, home: AuthGateway()),
     );
   }
 }

@@ -11,3 +11,14 @@ class AddToRoomFailure extends Failure {
 class FetchFailure extends Failure {
   FetchFailure({required super.message});
 }
+
+class LogoutFailure extends Failure{
+  LogoutFailure({required super.message});
+}
+class ToggleFailure extends Failure{
+  ToggleFailure({required super.message});
+}
+class IncreaseFailure extends Failure{
+  IncreaseFailure({required super.message});
+
+}

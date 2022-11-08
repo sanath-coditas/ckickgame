@@ -10,4 +10,5 @@ abstract class TextConstants {
   static const String loadingText = 'Loading......';
   static const String clickOnContinueText = 'Click on Continue....';
   static const String continueText = 'continue';
+  static const String noUsersFoundText = 'No Users Found';
 }

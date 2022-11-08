@@ -15,7 +15,27 @@ class PersonRepositoryImpl implements PersonRepository {
   }
 
   @override
-  Future<Either<Failure, List<PersonModel>>> getPersons() async {
+  Future<Either<Failure, Stream<List<PersonModel>>>> getPersons() async {
     return await fireStoreDataSource.getPersons();
+  }
+
+  @override
+  Future<Either<Failure, void>> logOut() async {
+    return await fireStoreDataSource.logoutUser();
+  }
+
+  @override
+  Future<Either<Failure, void>> togglePlay() async {
+    return await fireStoreDataSource.togglePlay();
+  }
+
+  @override
+  Future<Either<Failure, void>> increaseClickCount() async {
+    return await fireStoreDataSource.increaseClickCount();
+  }
+
+  @override
+  Future<Either<Failure, void>> resetScore() async {
+    return await fireStoreDataSource.resetScore();
   }
 }

@@ -1,7 +1,6 @@
 import 'package:clickgame/constants/text_constants.dart';
 import 'package:clickgame/data/models/person_model.dart';
 import 'package:clickgame/presentation/bloc/join_screen_bloc/joinscreen_bloc.dart';
-import 'package:clickgame/presentation/screens/room_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -14,11 +13,13 @@ class JoinScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       appBar: AppBar(
         title: const Text(TextConstants.joinText),
       ),
       body: BlocBuilder<JoinScreenBloc, JoinscreenState>(
         builder: (context, state) {
+          
           if (state is JoinscreenInitial) {
             return InputWidget(
                 formKey: _formKey, nameController: _nameController);
@@ -29,9 +30,9 @@ class JoinScreen extends StatelessWidget {
             );
           }
           if (state is SuccessState) {
-            return const Center(
-              child: Text(TextConstants.clickOnContinueText),
-            );
+            _nameController.clear();
+            return InputWidget(
+                formKey: _formKey, nameController: _nameController);
           }
           if (state is FailureState) {
             return Center(
@@ -43,20 +44,6 @@ class JoinScreen extends StatelessWidget {
       ),
       floatingActionButton: BlocBuilder<JoinScreenBloc, JoinscreenState>(
         builder: (context, state) {
-          if (state is SuccessState) {
-            return SizedBox(
-              width: 100,
-              child: FloatingActionButton(
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10)),
-                onPressed: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => const RoomScreen()));
-                },
-                child: const Text(TextConstants.continueText),
-              ),
-            );
-          }
           return FloatingActionButton(
             onPressed: () {
               if (_formKey.currentState!.validate()) {

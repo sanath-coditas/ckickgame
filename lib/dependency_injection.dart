@@ -2,12 +2,16 @@ import 'package:clickgame/data/datasources/firestore_datasource.dart';
 import 'package:clickgame/data/repositories/person_repository_impl.dart';
 import 'package:clickgame/domain/repositories/person_repository.dart';
 import 'package:clickgame/domain/usecases/add_to_room_usecase.dart';
+import 'package:clickgame/domain/usecases/increase_click_count.dart';
+import 'package:clickgame/domain/usecases/log_out_usecase.dart';
+import 'package:clickgame/domain/usecases/toggle_play_usecase.dart';
 import 'package:clickgame/presentation/bloc/join_screen_bloc/joinscreen_bloc.dart';
 import 'package:clickgame/presentation/bloc/play_screen_bloc/play_screen_bloc.dart';
 import 'package:clickgame/presentation/bloc/room_screen_bloc/room_screen_bloc.dart';
 import 'package:kiwi/kiwi.dart';
 
 import 'domain/usecases/get_persons_usecase.dart';
+import 'domain/usecases/reset_score_usecase.dart';
 
 part 'dependency_injection.g.dart';
 
@@ -28,6 +32,10 @@ abstract class Injector {
   //! Usecases
   @Register.factory(AddToRoomUsecase)
   @Register.factory(GetPersonsUsecase)
+  @Register.factory(LogoutUsecase)
+  @Register.factory(TogglePlayUsecase)
+  @Register.factory(IncreaseClickCountUsecase)
+  @Register.factory(ResetScoreUsecase)
 
   //! Repositories
   @Register.factory(PersonRepository, from: PersonRepositoryImpl)

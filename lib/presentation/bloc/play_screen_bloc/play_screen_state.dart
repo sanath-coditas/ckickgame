@@ -13,7 +13,7 @@ class PlayScreenInitial extends PlayScreenState {}
 class LoadingState extends PlayScreenState {}
 
 class SuccessState extends PlayScreenState {
-  final List<Person> persons;
+  final Stream<List<Person>> persons;
   const SuccessState({
     required this.persons,
   });

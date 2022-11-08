@@ -13,7 +13,7 @@ class RoomScreenInitial extends RoomScreenState {}
 class LoadingState extends RoomScreenState {}
 
 class SuccessState extends RoomScreenState {
-  final List<Person> persons;
+  final Stream<List<Person>> persons;
   const SuccessState({
     required this.persons,
   });

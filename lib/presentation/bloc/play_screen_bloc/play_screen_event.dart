@@ -8,3 +8,4 @@ abstract class PlayScreenEvent extends Equatable {
 }
 
 class GetPersonsEvent extends PlayScreenEvent{}
+class IncreaseEvent extends PlayScreenEvent{}

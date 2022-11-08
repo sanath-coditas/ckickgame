@@ -1,14 +1,13 @@
 import 'package:clickgame/core/error/failure.dart';
-import 'package:clickgame/domain/entities/person.dart';
 import 'package:clickgame/domain/repositories/person_repository.dart';
 import 'package:dartz/dartz.dart';
 
-class GetPersonsUsecase {
+class TogglePlayUsecase {
   final PersonRepository personRepository;
-  GetPersonsUsecase({
+  TogglePlayUsecase({
     required this.personRepository,
   });
-  Future<Either<Failure, Stream<List<Person>>>> getPersons() async {
-    return await personRepository.getPersons();
+  Future<Either<Failure, void>> togglePlay() async{
+    return await personRepository.togglePlay();
   }
 }
