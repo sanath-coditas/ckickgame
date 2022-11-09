@@ -19,14 +19,21 @@ class FireStoreDataSourceImpl implements FireStoreDataSource {
   Future<Either<Failure, void>> addToRoom(
       {required PersonModel personModel}) async {
     try {
-      final userCred = await FirebaseAuth.instance.signInAnonymously();
+      await FirebaseAuth.instance.signInAnonymously();
       await FirebaseFirestore.instance
           .collection('players')
-          .doc(userCred.user!.uid)
+          .doc(FirebaseAuth.instance.currentUser!.uid)
           .set(personModel.toJson());
+          
+      await FirebaseFirestore.instance
+          .collection('players')
+          .doc(FirebaseAuth.instance.currentUser!.uid)
+          .update({'id': FirebaseAuth.instance.currentUser!.uid});
       return const Right(null);
     } on AddToRoomFailure {
       return Left(AddToRoomFailure(message: 'Failed to add to Room....'));
+    } catch (e) {
+      return Left(AddToRoomFailure(message: e.toString()));
     }
   }
 
@@ -43,6 +50,8 @@ class FireStoreDataSourceImpl implements FireStoreDataSource {
       return Right(personsStream);
     } on FetchFailure {
       return Left(FetchFailure(message: 'Failed to fetch..'));
+    } catch (e) {
+      return Left(FetchFailure(message: e.toString()));
     }
   }
 
@@ -52,6 +61,8 @@ class FireStoreDataSourceImpl implements FireStoreDataSource {
       await FirebaseAuth.instance.signOut();
       return const Right(null);
     } on LogoutFailure {
+      return Left(LogoutFailure(message: 'Unable to Logout..'));
+    }catch(e){
       return Left(LogoutFailure(message: 'Unable to Logout..'));
     }
   }
@@ -69,13 +80,14 @@ class FireStoreDataSourceImpl implements FireStoreDataSource {
       return const Right(null);
     } on ToggleFailure {
       return Left(ToggleFailure(message: 'Failed to toggle....'));
+    } catch (e) {
+      return Left(ToggleFailure(message: e.toString()));
     }
   }
-  
+
   @override
   Future<Either<Failure, void>> disablePlay() async {
     try {
-      
       await FirebaseFirestore.instance
           .collection('isGameStarted')
           .doc('value')
@@ -86,8 +98,11 @@ class FireStoreDataSourceImpl implements FireStoreDataSource {
       return const Right(null);
     } on ToggleFailure {
       return Left(ToggleFailure(message: 'Failed to toggle....'));
+    } catch (e) {
+      return Left(ToggleFailure(message: e.toString()));
     }
   }
+
   @override
   Future<Either<Failure, void>> increaseClickCount() async {
     try {
@@ -107,6 +122,8 @@ class FireStoreDataSourceImpl implements FireStoreDataSource {
       return const Right(null);
     } on IncreaseFailure {
       return Left(IncreaseFailure(message: 'Failed to increase....'));
+    } catch (e) {
+      return Left(IncreaseFailure(message: e.toString()));
     }
   }
 
@@ -120,6 +137,8 @@ class FireStoreDataSourceImpl implements FireStoreDataSource {
       return const Right(null);
     } on IncreaseFailure {
       return Left(IncreaseFailure(message: 'Failed to increase....'));
+    } catch (e) {
+      return Left(IncreaseFailure(message: e.toString()));
     }
   }
 }

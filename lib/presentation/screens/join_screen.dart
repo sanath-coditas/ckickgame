@@ -19,7 +19,6 @@ class JoinScreen extends StatelessWidget {
       ),
       body: BlocBuilder<JoinScreenBloc, JoinscreenState>(
         builder: (context, state) {
-          
           if (state is JoinscreenInitial) {
             return InputWidget(
                 formKey: _formKey, nameController: _nameController);

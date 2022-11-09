@@ -23,7 +23,7 @@ class AuthGateway extends StatelessWidget {
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               if (snapshot.data!.docs.map((e) => e.data()['isStarted']).first) {
-                return PlayScreen();
+                return const PlayScreen();
               }
             }
             return const RoomScreen();

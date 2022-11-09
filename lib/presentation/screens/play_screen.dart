@@ -1,16 +1,17 @@
 import 'package:clickgame/constants/text_constants.dart';
 import 'package:clickgame/presentation/bloc/play_screen_bloc/play_screen_bloc.dart';
 import 'package:clickgame/presentation/screens/result_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:timer_count_down/timer_count_down.dart';
 import '../../domain/entities/person.dart';
 
 class PlayScreen extends StatelessWidget {
-  PlayScreen({super.key});
-  late Person winner;
+  const PlayScreen({super.key});
   @override
   Widget build(BuildContext context) {
+    late Person winner;
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       appBar: AppBar(title: const Text(TextConstants.playText)),
@@ -28,13 +29,14 @@ class PlayScreen extends StatelessWidget {
                   style: const TextStyle(fontSize: 60, color: Colors.red),
                 ),
                 interval: const Duration(milliseconds: 100),
-                onFinished: () {
-                  // print('Timer is done!');
-                  Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => ResultScreen(
-                      person: winner,
+                onFinished: ()  {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => ResultScreen(
+                        person: winner,
+                      ),
                     ),
-                  ));
+                  );
                 },
               ),
             ),
@@ -68,21 +70,20 @@ class PlayScreen extends StatelessWidget {
                               .compareTo(a.numberOftimesClicked)));
                           winner = snapshot.data![0];
                           return SizedBox(
-                              height: MediaQuery.of(context).size.height / 1.5,
-                              child: ListView.builder(
-                                itemBuilder: (context, index) {
-                                  return ListTile(
-                                    trailing: Text(snapshot
-                                        .data![index].numberOftimesClicked
-                                        .toString()),
-                                    title: Text(
-                                      snapshot.data![index].name,
-                                      style: const TextStyle(fontSize: 20),
-                                    ),
-                                  );
-                                },
-                                itemCount: snapshot.data!.length,
-                              ));
+                            height: MediaQuery.of(context).size.height / 1.5,
+                            // child: AnimatedList(
+                            //   itemBuilder: (context, index, animation) {
+                            //     return buildTile(snapshot.data![index]);
+                            //   },
+                            //   initialItemCount: snapshot.data!.length,
+                            // ),
+                            child: ListView.builder(
+                              itemBuilder: (context, index) {
+                                return buildTile(snapshot.data![index]);
+                              },
+                              itemCount: snapshot.data!.length,
+                            ),
+                          );
                         }
                         if (!snapshot.hasData) {
                           return const Center(
@@ -121,3 +122,18 @@ class PlayScreen extends StatelessWidget {
     );
   }
 }
+
+Widget buildTile(Person person) => ListTile(
+      trailing: Text(
+        person.numberOftimesClicked.toString(),
+        style: (FirebaseAuth.instance.currentUser!.uid == person.id)
+            ? const TextStyle(fontSize: 30, fontWeight: FontWeight.bold)
+            : const TextStyle(fontSize: 20),
+      ),
+      title: Text(
+        person.name,
+        style: (FirebaseAuth.instance.currentUser!.uid == person.id)
+            ? const TextStyle(fontSize: 30, fontWeight: FontWeight.bold)
+            : const TextStyle(fontSize: 20),
+      ),
+    );

@@ -4,6 +4,7 @@ import 'package:clickgame/core/error/failure.dart';
 import 'package:clickgame/domain/repositories/person_repository.dart';
 import 'package:dartz/dartz.dart';
 
+
 class PersonRepositoryImpl implements PersonRepository {
   final FireStoreDataSource fireStoreDataSource;
   const PersonRepositoryImpl({required this.fireStoreDataSource});
