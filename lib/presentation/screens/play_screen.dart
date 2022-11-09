@@ -68,22 +68,21 @@ class PlayScreen extends StatelessWidget {
                               .compareTo(a.numberOftimesClicked)));
                           winner = snapshot.data![0];
                           return SizedBox(
-                            height: MediaQuery.of(context).size.height / 1.5,
-                            child: ListView.builder(
-                              itemBuilder: (context, index) {
-                                return ListTile(
-                                  trailing: Text(snapshot
-                                      .data![index].numberOftimesClicked
-                                      .toString()),
-                                  title: Text(
-                                    snapshot.data![index].name,
-                                    style: const TextStyle(fontSize: 20),
-                                  ),
-                                );
-                              },
-                              itemCount: snapshot.data!.length,
-                            ),
-                          );
+                              height: MediaQuery.of(context).size.height / 1.5,
+                              child: ListView.builder(
+                                itemBuilder: (context, index) {
+                                  return ListTile(
+                                    trailing: Text(snapshot
+                                        .data![index].numberOftimesClicked
+                                        .toString()),
+                                    title: Text(
+                                      snapshot.data![index].name,
+                                      style: const TextStyle(fontSize: 20),
+                                    ),
+                                  );
+                                },
+                                itemCount: snapshot.data!.length,
+                              ));
                         }
                         if (!snapshot.hasData) {
                           return const Center(
